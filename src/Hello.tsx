@@ -1,5 +1,7 @@
 import * as React from "react";
-import "./Hello.css";
+import * as CSSModules from "react-css-modules";
+
+import styles from "./Hello.less";
 
 export interface IProps {
   name: string;
@@ -19,10 +21,8 @@ function Hello({
   }
 
   return (
-    <div className="hello">
-      <div className="greeting">
-        Hello {name + getExclamationMarks(enthusiasmLevel)}
-      </div>
+    <div styleName="hello">
+      <div>Hello {name + getExclamationMarks(enthusiasmLevel)}</div>
       <div>
         <button onClick={onDecrement}>-</button>
         <button onClick={onIncrement}>+</button>
@@ -31,7 +31,7 @@ function Hello({
   );
 }
 
-export default Hello;
+export default CSSModules(Hello, styles);
 
 function getExclamationMarks(numChars: number) {
   return Array(numChars + 1).join("!");

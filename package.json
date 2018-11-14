@@ -29,6 +29,7 @@
     "promise": "8.0.1",
     "raf": "3.4.0",
     "react": "^16.6.3",
+    "react-css-modules": "^4.7.7",
     "react-dev-utils": "^5.0.2",
     "react-dom": "^16.6.3",
     "react-redux": "^5.1.1",
@@ -60,8 +61,11 @@
     "@types/jest": "^23.3.9",
     "@types/node": "^10.12.7",
     "@types/react": "^16.7.6",
+    "@types/react-css-modules": "^4.6.2",
     "@types/react-dom": "^16.0.9",
     "cz-conventional-changelog": "^2.1.0",
+    "less": "^3.8.1",
+    "less-loader": "^4.1.0",
     "typescript": "^3.1.6"
   },
   "config": {
