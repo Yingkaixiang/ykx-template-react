@@ -4,9 +4,9 @@ import * as ReactDOM from "react-dom";
 import "./index.css";
 import registerServiceWorker from "./registerServiceWorker";
 import { createStore } from "redux";
-import { enthusiasm } from "./model/reducers/index";
-import { IStoreState } from "./model/types/index";
-import Hello from "./model/containers/Hello";
+import { enthusiasm } from "./models/reducers/index";
+import { IStoreState } from "./models/types/index";
+import Hello from "./models/containers/Hello";
 import { Provider } from "react-redux";
 
 const store = createStore<IStoreState, any, any, any>(enthusiasm, {

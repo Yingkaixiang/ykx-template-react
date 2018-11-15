@@ -1,4 +1,4 @@
-import Hello from "../../Hello";
+import Hello from "../../pages/Hello";
 import * as actions from "../actions/";
 import { IStoreState } from "../types/index";
 import { connect } from "react-redux";

@@ -1,5 +1,6 @@
 import * as React from "react";
-// import * as CSSModules from "react-css-modules";
+import * as CSSModules from "react-css-modules";
+import Button from "@/components/Button";
 
 import styles from "./Hello.less";
 
@@ -21,20 +22,21 @@ function Hello({
   }
 
   return (
-    <div className={styles.hello}>
-      <div className={styles.greeting}>
+    <div styleName="hello">
+      <div styleName="greeting">
         Hello {name + getExclamationMarks(enthusiasmLevel)}
       </div>
       <div>
         <button onClick={onDecrement}>-</button>
         <button onClick={onIncrement}>+</button>
+        <Button />
       </div>
     </div>
   );
 }
 
-// export default CSSModules(Hello, styles);
-export default Hello;
+export default CSSModules(Hello, styles);
+// export default Hello;
 
 function getExclamationMarks(numChars: number) {
   return Array(numChars + 1).join("!");
