@@ -55,7 +55,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom"
+    "test": "node scripts/test.js --env=jsdom",
+    "prettier": "./node_modules/.bin/prettier --find-config-path --write -l 'src/**/*.{ts,tsx,less,css}'"
   },
   "devDependencies": {
     "@types/jest": "^23.3.9",
@@ -67,6 +68,7 @@
     "jest-css-modules-transform": "^2.1.1",
     "less": "^3.8.1",
     "less-loader": "^4.1.0",
+    "prettier": "^1.15.2",
     "typescript": "^3.1.6"
   },
   "config": {
