@@ -1,5 +1,5 @@
-import * as React from "react";
-import * as CSSModules from "react-css-modules";
+import React from "react";
+import CSSModules from "react-css-modules";
 import Button from "@/components/Button";
 
 import styles from "./Hello.less";
