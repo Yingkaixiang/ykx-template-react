@@ -11,15 +11,15 @@ module.exports = {
   transform: {
     "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest",
     "^.+\\.tsx?$": "<rootDir>/config/jest/typescriptTransform.js",
-    "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-    "^(?!.*\\.(js|jsx|mjs|css|json)$)":
-      "<rootDir>/config/jest/fileTransform.js",
+    ".+\\.(css|less)$": "<rootDir>/node_modules/jest-css-modules-transform",
+    "^(?!.*\\.(js|jsx|mjs|json)$)": "<rootDir>/config/jest/fileTransform.js",
   },
   transformIgnorePatterns: [
     "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|ts|tsx)$",
   ],
   moduleNameMapper: {
     "^react-native$": "react-native-web",
+    // "\\.(css|less)$": "identity-obj-proxy",
   },
   moduleFileExtensions: [
     "web.ts",
