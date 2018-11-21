@@ -3,7 +3,8 @@
   "rules": {
     "member-access": false,
     "ordered-imports": false,
-    "no-console": false
+    "no-console": false,
+    "jsx-boolean-value": false
   },
   "linterOptions": {
     "exclude": [
