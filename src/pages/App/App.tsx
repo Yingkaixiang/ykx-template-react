@@ -1,4 +1,7 @@
 import React from "react";
+import CSSModule from "react-css-modules";
+
+import styles from "./App.less";
 
 interface IAppProps {
   count?: number;
@@ -20,13 +23,21 @@ const App: React.FunctionComponent<IAppProps> = ({
       <h1>redux demo</h1>
       <div>
         <span>{count}</span>
-        <button onClick={incr}>+1</button>
-        <button onClick={decr}>-1</button>
-        <button onClick={incrAsync}>+1 延迟 1s</button>
-        <button onClick={decrAsync}>-1 延迟 1s</button>
+        <button styleName="btn" onClick={incr}>
+          +1
+        </button>
+        <button styleName="btn" onClick={decr}>
+          -1
+        </button>
+        <button styleName="btn" onClick={incrAsync}>
+          +1 延迟 1s
+        </button>
+        <button styleName="btn" onClick={decrAsync}>
+          -1 延迟 1s
+        </button>
       </div>
     </div>
   );
 };
 
-export default App;
+export default CSSModule(styles)(App);

@@ -5,7 +5,7 @@ import App from "../App";
 
 it("成功渲染 4 个按钮", () => {
   const app = shallow(<App />);
-  expect(app.find("button").length).toEqual(4);
+  expect(app.find(".btn").length).toEqual(4);
 });
 
 it("组件显示值为 1", () => {
