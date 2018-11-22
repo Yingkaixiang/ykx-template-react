@@ -5,10 +5,12 @@ import styles from "./App.less";
 
 interface IAppProps {
   count?: number;
+  name?: string;
   incr?: () => void;
   decr?: () => void;
   incrAsync?: () => void;
   decrAsync?: () => void;
+  reqTest?: () => void;
 }
 
 const App: React.FunctionComponent<IAppProps> = ({
@@ -17,6 +19,8 @@ const App: React.FunctionComponent<IAppProps> = ({
   decr,
   incrAsync,
   decrAsync,
+  reqTest,
+  name,
 }) => {
   return (
     <div>
@@ -35,6 +39,7 @@ const App: React.FunctionComponent<IAppProps> = ({
         <button styleName="btn" onClick={decrAsync}>
           -1 延迟 1s
         </button>
+        <button onClick={reqTest}>接口测试：{name}</button>
       </div>
     </div>
   );

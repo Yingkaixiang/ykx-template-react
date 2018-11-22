@@ -15,6 +15,7 @@ function mapDispatchToProps(dispatch: Dispatch<IActionCreator>) {
     decrAsync: () => dispatch({ type: "app/decrAsync" }),
     incr: () => dispatch({ type: "app/incr" }),
     incrAsync: () => dispatch({ type: "app/incrAsync" }),
+    reqTest: () => dispatch({ type: "app/reqTest" }),
   };
 }
 
