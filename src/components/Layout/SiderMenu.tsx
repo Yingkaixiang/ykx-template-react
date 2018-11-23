@@ -2,13 +2,21 @@ import React from "react";
 import { Menu, Icon } from "antd";
 import { ClickParam } from "antd/lib/menu";
 import { withRouter, RouteComponentProps } from "react-router-dom";
+import { connect } from "react-redux";
 
 import { IMenu, menuTree } from "@/config/routes";
 
 const SubMenu = Menu.SubMenu;
 
-const SiderMenu: React.FunctionComponent<RouteComponentProps> = ({
+interface ISiderMenu {
+  collapsed?: boolean;
+}
+
+type ISiderMenuProps = ISiderMenu & RouteComponentProps;
+
+const SiderMenu: React.FunctionComponent<ISiderMenuProps> = ({
   history,
+  collapsed,
 }) => {
   const renderTitle = (item: IMenu) => {
     return (
@@ -51,4 +59,4 @@ const SiderMenu: React.FunctionComponent<RouteComponentProps> = ({
   );
 };
 
-export default withRouter(SiderMenu);
+export default connect((state: any) => state.layout)(withRouter(SiderMenu));
