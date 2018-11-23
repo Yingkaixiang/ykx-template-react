@@ -14,6 +14,7 @@ const paths = require("./paths");
 const getClientEnvironment = require("./env");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const tsImportPluginFactory = require("ts-import-plugin");
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -163,6 +164,15 @@ module.exports = {
                   // disable type checker - we will use it in fork plugin
                   transpileOnly: true,
                   configFile: paths.appTsProdConfig,
+                  getCustomTransformers: () => ({
+                    before: [
+                      tsImportPluginFactory({
+                        libraryDirectory: "es",
+                        libraryName: "antd",
+                        style: "css",
+                      }),
+                    ],
+                  }),
                 },
               },
             ],
@@ -181,6 +191,8 @@ module.exports = {
           // in the main CSS file.
           {
             test: /\.(css|less)$/,
+            include: /src/,
+            exclude: /src\/index.css/,
             loader: ExtractTextPlugin.extract(
               Object.assign(
                 {
@@ -233,6 +245,19 @@ module.exports = {
               ),
             ),
             // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
+          },
+          {
+            test: /\.css$/,
+            include: [/node_modules/, /src\/index.css/],
+            use: [
+              require.resolve("style-loader"),
+              {
+                loader: require.resolve("css-loader"),
+                options: {
+                  importLoaders: 1,
+                },
+              },
+            ],
           },
           // "file" loader makes sure assets end up in the `build` folder.
           // When you `import` an asset, you get its filename.

@@ -1,0 +1,41 @@
+@shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
+@header-height: 64px;
+
+.sider {
+  height: 100vh;
+  box-shadow: @shadow;
+  position: fixed;
+}
+
+.logo {
+  height: @header-height;
+  background: #002140;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.main {
+  margin-left: 256px;
+  min-height: 100vh;
+}
+
+.header {
+  background: #fff;
+  box-shadow: @shadow;
+  position: fixed;
+  width: 100%;
+  z-index: 10;
+  height: @header-height;
+}
+
+.content {
+  margin: (24px + @header-height) 24px 0;
+}
+
+.breadcrumb {
+  margin-bottom: 24px;
+}
+
+.footer {
+  text-align: center;
+}

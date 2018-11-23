@@ -1,5 +1,6 @@
 import React from "react";
 import CSSModule from "react-css-modules";
+import { Button } from "antd";
 
 import styles from "./App.less";
 
@@ -23,7 +24,8 @@ const App: React.FunctionComponent<IAppProps> = ({
   name,
 }) => {
   return (
-    <div>
+    <div styleName="main">
+      <Button type="primary">Button</Button>
       <h1>redux demo</h1>
       <div>
         <span>{count}</span>
