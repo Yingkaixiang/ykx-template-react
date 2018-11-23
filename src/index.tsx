@@ -6,6 +6,10 @@ import { Provider } from "react-redux";
 import { ConnectedRouter } from "connected-react-router";
 import { createBrowserHistory } from "history";
 
+import { LocaleProvider } from "antd";
+import zh_CN from "antd/lib/locale-provider/zh_CN";
+import "moment/locale/zh-cn";
+
 import registerServiceWorker from "./registerServiceWorker";
 import Router from "./router";
 import store from "./store";
@@ -17,7 +21,9 @@ const history = createBrowserHistory();
 ReactDOM.render(
   <Provider store={store(history)}>
     <ConnectedRouter history={history}>
-      <Router />
+      <LocaleProvider locale={zh_CN}>
+        <Router />
+      </LocaleProvider>
     </ConnectedRouter>
   </Provider>,
   document.getElementById("root") as HTMLElement,

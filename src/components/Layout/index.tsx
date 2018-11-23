@@ -1,24 +1,28 @@
 import React from "react";
 import { Layout } from "antd";
 import CSSModule from "react-css-modules";
-import { Link } from "react-router-dom";
+import { Link, withRouter, RouteComponentProps } from "react-router-dom";
 import { connect } from "react-redux";
 
 import styles from "./index.less";
 
 import SiderMenu from "./SiderMenu";
-import Breadcrumb from "./Breadcrumb";
+import Breadcrumb from "./Breadcrumb/";
+import { format } from "./Breadcrumb/util";
 import Nav from "./Nav";
 
 const { Sider, Header, Content, Footer } = Layout;
 
-interface IMyLayoutProps {
+interface IMyLayout {
   collapsed?: boolean;
 }
+
+type IMyLayoutProps = IMyLayout & RouteComponentProps;
 
 const MyLayout: React.FunctionComponent<IMyLayoutProps> = ({
   children,
   collapsed,
+  location,
 }) => {
   return (
     <Layout>
@@ -32,7 +36,7 @@ const MyLayout: React.FunctionComponent<IMyLayoutProps> = ({
         </Header>
         <Content styleName="content">
           <div styleName="breadcrumb">
-            <Breadcrumb />
+            <Breadcrumb routes={format(location.pathname)} />
           </div>
           <div>{children}</div>
         </Content>
@@ -45,5 +49,5 @@ const MyLayout: React.FunctionComponent<IMyLayoutProps> = ({
 };
 
 export default connect((state: any) => state.layout)(
-  CSSModule(styles)(MyLayout),
+  withRouter(CSSModule(styles)(MyLayout)),
 );

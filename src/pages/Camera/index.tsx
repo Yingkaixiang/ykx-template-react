@@ -8,14 +8,13 @@ import Loading from "@/pages/Loading";
 import styles from "./index.less";
 
 const Capture = Loadable({
-  loader: () => import("./Capture"),
+  loader: () => import("./Capture/"),
   loading: () => <Loading />,
 });
 
 const Camera: React.FunctionComponent<RouteComponentProps> = ({ match }) => {
   return (
-    <div styleName="main">
-      <span>camera</span>
+    <div>
       <Route path={`${match.path}/capture`} component={Capture} />
     </div>
   );
