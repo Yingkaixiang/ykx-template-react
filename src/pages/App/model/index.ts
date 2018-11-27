@@ -17,11 +17,13 @@ export interface IActionCreator {
 export interface IState {
   count: number;
   name: string;
+  matches: any[];
 }
 
 const state: IState = {
   count: 0,
   name: "未登录",
+  matches: [],
 };
 
 interface IAction {
@@ -37,6 +39,8 @@ export function reducers(prevState: IState = state, action: IAction) {
       return { ...prevState, count: prevState.count - 1 };
     case REQ_TEST_SUCCESS:
       return { ...prevState, name: action.payload };
+    case "app/matches":
+      return { ...prevState, matches: action.payload };
     default:
       return prevState;
   }

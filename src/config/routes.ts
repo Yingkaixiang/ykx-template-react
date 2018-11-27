@@ -38,18 +38,21 @@ export const menu: IMenu[] = [
   },
   {
     title: "抓拍列表",
+    icon: "",
     url: "/camera/capture",
     id: "cameraCapture",
     pid: "camera",
   },
   {
     title: "告警列表",
+    icon: "",
     url: "/camera/alarm",
     id: "cameraAlarm",
     pid: "camera",
   },
   {
     title: "卡口设置",
+    icon: "",
     url: "/camera/option",
     id: "cameraOption",
     pid: "camera",
@@ -81,6 +84,41 @@ export const menu: IMenu[] = [
     url: "/search/portrait/faces",
     id: "searchPortraitInFaces",
     pid: "searchPortrait",
+  },
+  {
+    title: "离线分析",
+    icon: "",
+    url: "/search/offline",
+    id: "searchOffline",
+    pid: "search",
+  },
+  {
+    title: "N:N 比对",
+    icon: "",
+    url: "/search/N2N",
+    id: "searchN2N",
+    pid: "search",
+  },
+  {
+    title: "1:1 比对",
+    icon: "",
+    url: "/search/One2One",
+    id: "searchOne2One",
+    pid: "search",
+  },
+  {
+    title: "布控管理",
+    icon: "appstore",
+    url: "/task",
+    id: "task",
+    pid: "",
+  },
+  {
+    title: "任务列表",
+    icon: "",
+    url: "/task/list",
+    id: "taskList",
+    pid: "task",
   },
 ];
 

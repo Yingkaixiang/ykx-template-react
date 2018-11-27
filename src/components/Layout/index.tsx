@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 
 import styles from "./index.less";
 
-import SiderMenu from "./SiderMenu";
+import SiderMenu from "./SiderMenu/";
 import Breadcrumb from "./Breadcrumb/";
 import { format } from "./Breadcrumb/util";
 import Nav from "./Nav";
