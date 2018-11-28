@@ -18,6 +18,7 @@ import Nav from "./Nav";
 
 import routes from "@/router";
 import config, { IConfig } from "@/config/routes";
+import MatchContext from "@/context/Match";
 
 const { Sider, Header, Content, Footer } = Layout;
 
@@ -39,13 +40,11 @@ const MyLayout: React.FunctionComponent<IMyLayoutProps> = ({
   location,
   route,
 }) => {
-  const matches = matchRoutes(routes, location.pathname)
+  const matches: IConfig[] = matchRoutes(routes, location.pathname)
     .filter((item) => item.match.path !== "/" && item.match.path !== "*")
     .map((item) => {
       return item.route as IConfig;
     });
-
-  console.dir(matches);
 
   return (
     <Layout>
@@ -63,7 +62,11 @@ const MyLayout: React.FunctionComponent<IMyLayoutProps> = ({
               <Breadcrumb routes={matches} />
             </div>
           ) : null}
-          <div>{renderRoutes(route ? route.routes : [])}</div>
+          <MatchContext.Provider value={matches}>
+            <div styleName="container">
+              {renderRoutes(route ? route.routes : [])}
+            </div>
+          </MatchContext.Provider>
         </Content>
         <Footer styleName="footer">
           React Template ©2018 Created by Yingkaixaing

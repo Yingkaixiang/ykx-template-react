@@ -4,6 +4,8 @@ import { Button } from "antd";
 
 import styles from "./App.less";
 
+import MatchContext from "@/context/Match";
+
 interface IAppProps {
   count?: number;
   name?: string;
@@ -42,6 +44,9 @@ const App: React.FunctionComponent<IAppProps> = ({
           -1 延迟 1s
         </button>
         <button onClick={reqTest}>接口测试：{name}</button>
+        <MatchContext.Consumer>
+          {(value) => <div>{JSON.stringify(value)}</div>}
+        </MatchContext.Consumer>
       </div>
     </div>
   );

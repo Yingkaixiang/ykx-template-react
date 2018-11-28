@@ -7,7 +7,7 @@ import styles from "./index.less";
 const Camera: React.FunctionComponent<RouteConfigComponentProps> = ({
   route,
 }) => {
-  return <div>{renderRoutes(route ? route.routes : [])}</div>;
+  return <div styleName="main">{renderRoutes(route ? route.routes : [])}</div>;
 };
 
 export default CSSModule(styles)(Camera);

@@ -4,13 +4,15 @@ import { Form, DatePicker, Select } from "antd";
 
 import styles from "./index.less";
 
+import MatchContext from "@/context/Match";
+
 const FormItem = Form.Item;
 const { RangePicker } = DatePicker;
 const Option = Select.Option;
 
 const Capture: React.FunctionComponent = () => {
   return (
-    <div>
+    <div styleName="main">
       <div styleName="filter">
         <Form layout="inline">
           <FormItem label="选择时间">
@@ -28,7 +30,11 @@ const Capture: React.FunctionComponent = () => {
           </FormItem>
         </Form>
       </div>
-      <div styleName="list" />
+      <div styleName="list">
+        <MatchContext.Consumer>
+          {(value) => <div>{JSON.stringify(value)}</div>}
+        </MatchContext.Consumer>
+      </div>
     </div>
   );
 };
