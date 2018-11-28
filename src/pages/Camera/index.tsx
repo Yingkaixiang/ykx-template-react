@@ -1,23 +1,13 @@
 import React from "react";
 import CSSModule from "react-css-modules";
-import { Route, RouteComponentProps } from "react-router-dom";
-import Loadable from "react-loadable";
-
-import Loading from "@/pages/Loading";
+import { RouteConfigComponentProps, renderRoutes } from "react-router-config";
 
 import styles from "./index.less";
 
-const Capture = Loadable({
-  loader: () => import("./Capture/"),
-  loading: () => <Loading />,
-});
-
-const Camera: React.FunctionComponent<RouteComponentProps> = ({ match }) => {
-  return (
-    <div>
-      <Route path={`${match.path}/capture`} component={Capture} />
-    </div>
-  );
+const Camera: React.FunctionComponent<RouteConfigComponentProps> = ({
+  route,
+}) => {
+  return <div>{renderRoutes(route ? route.routes : [])}</div>;
 };
 
 export default CSSModule(styles)(Camera);

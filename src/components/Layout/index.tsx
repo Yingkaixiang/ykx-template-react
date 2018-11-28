@@ -1,15 +1,23 @@
 import React from "react";
 import { Layout } from "antd";
+import { connect } from "react-redux";
 import CSSModule from "react-css-modules";
 import { Link, withRouter, RouteComponentProps } from "react-router-dom";
-import { connect } from "react-redux";
+import {
+  RouteConfigComponentProps,
+  renderRoutes,
+  matchRoutes,
+} from "react-router-config";
+import arrayToTree from "array-to-tree";
 
 import styles from "./index.less";
 
 import SiderMenu from "./SiderMenu/";
 import Breadcrumb from "./Breadcrumb/";
-import { format } from "./Breadcrumb/util";
 import Nav from "./Nav";
+
+import routes from "@/router";
+import config, { IConfig } from "@/config/routes";
 
 const { Sider, Header, Content, Footer } = Layout;
 
@@ -17,28 +25,45 @@ interface IMyLayout {
   collapsed?: boolean;
 }
 
-type IMyLayoutProps = IMyLayout & RouteComponentProps;
+type IMyLayoutProps = IMyLayout &
+  RouteComponentProps &
+  RouteConfigComponentProps;
+
+const treeData = arrayToTree(config, {
+  customID: "id",
+  parentProperty: "pid",
+}).filter((item) => item.path !== "/" && item.path !== "*");
 
 const MyLayout: React.FunctionComponent<IMyLayoutProps> = ({
-  children,
   collapsed,
   location,
+  route,
 }) => {
+  const matches = matchRoutes(routes, location.pathname)
+    .filter((item) => item.match.path !== "/" && item.match.path !== "*")
+    .map((item) => {
+      return item.route as IConfig;
+    });
+
+  console.dir(matches);
+
   return (
     <Layout>
       <Sider styleName="sider" width="256" collapsed={collapsed}>
         <Link to="/" styleName="logo" />
-        <SiderMenu />
+        <SiderMenu treeData={treeData} matches={matches} />
       </Sider>
       <Layout styleName="main" style={{ marginLeft: collapsed ? 80 : 256 }}>
         <Header styleName="header">
           <Nav />
         </Header>
         <Content styleName="content">
-          <div styleName="breadcrumb">
-            <Breadcrumb routes={format(location.pathname)} />
-          </div>
-          <div>{children}</div>
+          {matches.length ? (
+            <div styleName="breadcrumb">
+              <Breadcrumb routes={matches} />
+            </div>
+          ) : null}
+          <div>{renderRoutes(route ? route.routes : [])}</div>
         </Content>
         <Footer styleName="footer">
           React Template ©2018 Created by Yingkaixaing

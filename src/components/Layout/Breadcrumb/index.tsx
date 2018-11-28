@@ -1,15 +1,11 @@
 import React from "react";
-import { Breadcrumb } from "antd";
 import { Link } from "react-router-dom";
+import { Breadcrumb } from "antd";
 
-export interface IBreadcrumbItem {
-  id: string;
-  url?: string;
-  title: string;
-}
+import { IConfig } from "@/config/routes";
 
 interface IMyBreadcrumbProps {
-  routes: IBreadcrumbItem[];
+  routes: Array<Partial<IConfig>>;
 }
 
 const MyBreadcrumb: React.FunctionComponent<IMyBreadcrumbProps> = ({
@@ -19,10 +15,10 @@ const MyBreadcrumb: React.FunctionComponent<IMyBreadcrumbProps> = ({
     <Breadcrumb>
       {routes.map((item) => (
         <Breadcrumb.Item key={item.id}>
-          {item.url ? (
-            <Link to={item.url || ""}>{item.title}</Link>
+          {item.path ? (
+            <Link to={item.path || ""}>{item.name}</Link>
           ) : (
-            <span>{item.title}</span>
+            <span>{item.name}</span>
           )}
         </Breadcrumb.Item>
       ))}

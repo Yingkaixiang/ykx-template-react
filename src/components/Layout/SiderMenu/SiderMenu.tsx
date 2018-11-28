@@ -1,32 +1,39 @@
 import React from "react";
 import { Menu, Icon } from "antd";
 import { ClickParam } from "antd/lib/menu";
-import { RouteComponentProps } from "react-router-dom";
 
-import { IMenu, menuTree } from "@/config/routes";
+import { ISiderMenuProps, SiderMenuItem, SiderMenuArray } from "./d";
 
 const SubMenu = Menu.SubMenu;
 
-type ISiderMenuProps = RouteComponentProps;
-interface ISiderMenuState {
-  openKeys: string[];
-}
-
-class SiderMenu extends React.Component<ISiderMenuProps, ISiderMenuState> {
+class SiderMenu extends React.Component<ISiderMenuProps, {}> {
   state = {
     openKeys: [],
+    selectedKeys: [],
   };
 
-  renderTitle = (item: IMenu) => {
+  componentDidMount() {
+    const { matches } = this.props;
+    const keys = matches.map((item) => item.id);
+    this.setState({ openKeys: keys, selectedKeys: keys });
+  }
+
+  componentWillReceiveProps(nextProps: ISiderMenuProps) {
+    const { matches } = nextProps;
+    const keys = matches.map((item) => item.id);
+    this.setState({ openKeys: keys, selectedKeys: keys });
+  }
+
+  renderTitle = (item: SiderMenuItem) => {
     return (
       <span>
         {item.icon ? <Icon type={item.icon} /> : null}
-        <span>{item.title}</span>
+        <span>{item.name}</span>
       </span>
     );
   };
 
-  renderMenu = (list: IMenu[]) => {
+  renderMenu = (list: SiderMenuArray) => {
     return list.map((item) => {
       if (item.children) {
         return (
@@ -44,29 +51,33 @@ class SiderMenu extends React.Component<ISiderMenuProps, ISiderMenuState> {
     });
   };
 
-  handleClick = ({ item }: ClickParam) => {
-    const { history } = this.props;
-    const url = item.props.data.url;
-    if (url) {
-      history.push(url);
-    }
+  handleClick = ({ item, key }: ClickParam) => {
+    this.setState({ selectedKeys: [key] }, () => {
+      const { history } = this.props;
+      const path = item.props.data.path;
+      if (path) {
+        history.push(path);
+      }
+    });
   };
 
   handleOpenChange = (openKeys: string[]) => {
-    // this.setState({
-    //   openKeys: [openKeys[openKeys.length - 1]],
-    // });
+    this.setState({ openKeys });
   };
 
   render() {
+    const { treeData } = this.props;
+    const { openKeys, selectedKeys } = this.state;
     return (
       <Menu
         theme="dark"
         mode="inline"
+        openKeys={openKeys}
+        selectedKeys={selectedKeys}
         onClick={this.handleClick}
         onOpenChange={this.handleOpenChange}
       >
-        {this.renderMenu(menuTree)}
+        {this.renderMenu(treeData)}
       </Menu>
     );
   }
