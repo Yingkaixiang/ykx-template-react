@@ -4,19 +4,15 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
 import createSagaMiddleware from "redux-saga";
 import { createBrowserHistory } from "history";
-import { Switch, Route } from "react-router-dom";
-import Loadable from "react-loadable";
 import {
   connectRouter,
   routerMiddleware,
   ConnectedRouter,
 } from "connected-react-router";
+import { renderRoutes } from "react-router-config";
 
 import registerServiceWorker from "./registerServiceWorker";
-
-// import App from "@/pages/App/";
-import Loading from "@/pages/Loading";
-import NotFound from "@/pages/NotFound";
+import router from "./router";
 
 import * as app from "@/pages/App/model/";
 
@@ -37,21 +33,9 @@ const store = createStore(
 
 sagaMiddlewares.run(app.rootSaga);
 
-const LoadableApp = Loadable({
-  loader: () => import("@/pages/App/"),
-  loading: () => <Loading />,
-});
-
 ReactDOM.render(
   <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <div>
-        <Switch>
-          <Route exact path="/" component={LoadableApp} />
-          <Route component={NotFound} />
-        </Switch>
-      </div>
-    </ConnectedRouter>
+    <ConnectedRouter history={history}>{renderRoutes(router)}</ConnectedRouter>
   </Provider>,
   document.getElementById("root") as HTMLElement,
 );
