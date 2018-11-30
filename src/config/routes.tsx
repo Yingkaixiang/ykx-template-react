@@ -5,43 +5,44 @@ import { RouteConfig } from "react-router-config";
 import Loading from "@/pages/Loading";
 import NotFound from "@/pages/NotFound";
 
-type ComponentType = Promise<
-  React.ComponentType<{}> | { default: React.ComponentType<{}> }
->;
-
 export interface Routes extends RouteConfig {
   name: string;
   routes?: Routes[];
 }
-
-const dynamic = (Component: ComponentType) => {
-  return Loadable({
-    loader: () => Component,
-    loading: () => <Loading />,
-  });
-};
 
 const routes: Routes[] = [
   {
     name: "首页",
     path: "/",
     exact: true,
-    component: dynamic(import("@/pages/App/")),
+    component: Loadable({
+      loader: () => import("@/pages/App/"),
+      loading: () => <Loading />,
+    }),
   },
   {
     name: "Redux",
     path: "/redux",
-    component: dynamic(import("@/pages/Redux/")),
+    component: Loadable({
+      loader: () => import("@/pages/Redux/"),
+      loading: () => <Loading />,
+    }),
     routes: [
       {
         name: "Redux Sync",
         path: "/redux/sync",
-        component: dynamic(import("@/pages/Redux/Sync/")),
+        component: Loadable({
+          loader: () => import("@/pages/Redux/Sync/"),
+          loading: () => <Loading />,
+        }),
       },
       {
         name: "Redux Async",
         path: "/redux/async",
-        component: dynamic(import("@/pages/Redux/Async/")),
+        component: Loadable({
+          loader: () => import("@/pages/Redux/Async/"),
+          loading: () => <Loading />,
+        }),
       },
     ],
   },

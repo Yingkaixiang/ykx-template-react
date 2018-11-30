@@ -1,13 +1,19 @@
 import React from "react";
 import { withRouter, RouteComponentProps, Link } from "react-router-dom";
-import { matchRoutes } from "react-router-config";
+import {
+  matchRoutes,
+  renderRoutes,
+  RouteConfigComponentProps,
+} from "react-router-config";
 import shortid from "shortid";
 
 import Navigation from "./Navigation";
 import Breadcrumb from "./Breadcrumb/";
 import routes, { Routes } from "@/config/routes";
 
-const Layout: React.SFC<RouteComponentProps> = ({ location }) => {
+type LayoutProps = RouteComponentProps & RouteConfigComponentProps;
+
+const Layout: React.SFC<LayoutProps> = ({ location, route }) => {
   const matchRouteList = matchRoutes(routes, location.pathname);
 
   return (
@@ -28,6 +34,8 @@ const Layout: React.SFC<RouteComponentProps> = ({ location }) => {
         })}
       </Breadcrumb>
       <Navigation routes={routes} />
+      <h1>Content</h1>
+      <div>{renderRoutes(route ? route.routes : [])}</div>
     </div>
   );
 };
