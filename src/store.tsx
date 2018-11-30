@@ -4,7 +4,7 @@ import createSagaMiddleware from "redux-saga";
 
 import history from "./history";
 
-import * as app from "@/pages/App/model/";
+import * as app from "@/pages/Redux/Async/model/";
 
 const reducers = combineReducers({
   app: app.reducers,

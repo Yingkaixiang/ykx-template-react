@@ -21,6 +21,15 @@ const routes: Routes[] = [
     }),
   },
   {
+    name: "登录",
+    path: "/login",
+    exact: true,
+    component: Loadable({
+      loader: () => import("@/pages/Login/"),
+      loading: () => <Loading />,
+    }),
+  },
+  {
     name: "Redux",
     path: "/redux",
     component: Loadable({

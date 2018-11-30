@@ -1,25 +1,7 @@
-import { connect } from "react-redux";
-import { Dispatch } from "redux";
+import React from "react";
 
-import { IActionCreator, IState } from "./model/";
+const App: React.SFC = () => {
+  return <div>app</div>;
+};
 
-import App from "./App";
-
-function mapStateToProps(state: any): IState {
-  return state.app;
-}
-
-function mapDispatchToProps(dispatch: Dispatch<IActionCreator>) {
-  return {
-    decr: () => dispatch({ type: "app/decr" }),
-    decrAsync: () => dispatch({ type: "app/decrAsync" }),
-    incr: () => dispatch({ type: "app/incr" }),
-    incrAsync: () => dispatch({ type: "app/incrAsync" }),
-    reqTest: () => dispatch({ type: "app/reqTest" }),
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(App);
+export default App;

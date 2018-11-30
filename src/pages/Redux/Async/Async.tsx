@@ -1,7 +1,7 @@
 import React from "react";
 import CSSModule from "react-css-modules";
 
-import styles from "./App.less";
+import styles from "./Async.less";
 
 interface IAppProps {
   count?: number;
