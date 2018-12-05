@@ -12,6 +12,7 @@ const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const getClientEnvironment = require("./env");
 const paths = require("./paths");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
+const tsImportPluginFactory = require("ts-import-plugin");
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -158,6 +159,15 @@ module.exports = {
                 options: {
                   // disable type checker - we will use it in fork plugin
                   transpileOnly: true,
+                  getCustomTransformers: () => ({
+                    before: [
+                      tsImportPluginFactory({
+                        libraryDirectory: "es",
+                        libraryName: "antd",
+                        style: "css",
+                      }),
+                    ],
+                  }),
                 },
               },
             ],
@@ -169,6 +179,8 @@ module.exports = {
           // in development "style" loader enables hot editing of CSS.
           {
             test: /\.(css|less)$/,
+            include: /src/,
+            exclude: /src\/index.css/,
             use: [
               require.resolve("style-loader"),
               {
@@ -177,7 +189,7 @@ module.exports = {
                   importLoaders: 2,
                   sourceMap: true,
                   modules: true,
-                  localIdentName: "[name]-[hash:base64:5]",
+                  localIdentName: "[name]__[local]--[hash:base64:5]",
                 },
               },
               {
@@ -205,6 +217,19 @@ module.exports = {
                 options: {
                   strictMath: true,
                   noIeCompat: true,
+                },
+              },
+            ],
+          },
+          {
+            test: /\.css$/,
+            include: [/node_modules/, /src\/index.css/],
+            use: [
+              require.resolve("style-loader"),
+              {
+                loader: require.resolve("css-loader"),
+                options: {
+                  importLoaders: 1,
                 },
               },
             ],
