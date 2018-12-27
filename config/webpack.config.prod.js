@@ -249,15 +249,10 @@ module.exports = {
           {
             test: /\.css$/,
             include: [/node_modules/, /src\/index.css/],
-            use: [
-              require.resolve("style-loader"),
-              {
-                loader: require.resolve("css-loader"),
-                options: {
-                  importLoaders: 1,
-                },
-              },
-            ],
+            use: ExtractTextPlugin.extract({
+              fallback: "style-loader",
+              use: "css-loader",
+            }),
           },
           // "file" loader makes sure assets end up in the `build` folder.
           // When you `import` an asset, you get its filename.
