@@ -6,7 +6,14 @@
     "no-console": false,
     "jsx-boolean-value": false,
     "interface-name": false,
-    "object-literal-sort-keys": false
+    "object-literal-sort-keys": false,
+    "no-var-requires": false,
+    "jsx-no-string-ref": false,
+    "no-empty-interface": false,
+    "prefer-for-of": false,
+    "curly": false,
+    "jsx-no-lambda": false,
+    "variable-name": false
   },
   "linterOptions": {
     "exclude": [

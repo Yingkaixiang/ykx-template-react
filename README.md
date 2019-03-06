@@ -6,6 +6,18 @@
 
 快速进行项目开发。
 
+## 代理请求
+
+通过在 `package.json` 中进行 `proxy` 的配置既可以使用请求代理。
+
+## Todo
+
+- 命令行快速创建组件，组件包含的文件为 `index.tsx` `Container.tsx` `[Component].tsx` `[Component].less`。
+- 升级 React 版本并添加使用 Hooks 的例子。
+- 移除对于 `react-css-module` 的依赖，原因如下：
+  - [查看 issue](https://github.com/facebook/react/issues/14494#issuecomment-466983049)
+  - [没有外部 issue 且更新频率很低](https://github.com/gajus/react-css-modules)
+
 ## 技术栈
 
 ### 基本
